@@ -10,6 +10,9 @@ from datetime import datetime, timedelta
 
 
 class Setup:
+    """Get historical data for modelling. Apply the linear regression.
+       Return slope and intercept coefficients"""
+
     def __init__(self, interval, days):
         self.client = Client()
         self.interval, self.days = interval, days
@@ -33,6 +36,8 @@ class Setup:
 
 
 class Process:
+    """Asynchronously retrieve and process current data"""
+
     def __init__(self, interval=Client.KLINE_INTERVAL_15MINUTE, threshold=1., days=30, minutes=60):
         self.slope, self.intercept = Setup(interval, days).create_coefficients()
         self.now, self.btcusdt, self.ethusdt, self.ethusdt_decoupled_prev = None, None, None, None
@@ -40,6 +45,9 @@ class Process:
         self.start = datetime.utcnow()
 
     async def process(self):
+        """The coroutine to find independent of BTCUSDT ETHUSDT futures price movements and to send
+           the console message if they change beyond a threshold within a time period"""
+
         if self.ethusdt and self.btcusdt:
             ethusdt_decoupled = abs(self.ethusdt - (self.intercept + self.slope * self.btcusdt))
 
@@ -55,6 +63,9 @@ class Process:
                 self.ethusdt_decoupled_prev = None
 
     async def futures_listener(self, client):
+        """The coroutine to infinitely retrieve and set the current BTCUSDT and ETHUSDT price
+           and time data from the websocket stream and then call the processing coroutine."""
+
         try:
             async with BinanceSocketManager(client).all_ticker_futures_socket() as stream:
                 while True:
@@ -64,7 +75,7 @@ class Process:
                     if res['data']['s'] == 'ETHUSDT':
                         self.ethusdt = float(res['data']['a'])
                         self.now = datetime.utcfromtimestamp(res['data']['E']/1000)
-                    loop.call_soon(asyncio.create_task, self.process())
+                    loop.call_soon(asyncio.create_task, self.process())  # avoid blocking the loop
         except BinanceAPIException as e:
             logging.exception(f'Process.futures_listener: {e.status_code}, {e.message}')
             sys.exit(1)
