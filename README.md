@@ -15,9 +15,9 @@
 и имеет выраженный линейный характер. 
 
 <p float="left" align="center">
-    <img src="https://dtjn1pr44tf3g.cloudfront.net/BTCUSDT_plot.png" alt="BTCUSDT scatter plot" width="32%">
-    <img src="https://dtjn1pr44tf3g.cloudfront.net/ETHUSDT_plot.png" alt="ETHUSDT scatter plot" width="32%">
-    <img src="https://dtjn1pr44tf3g.cloudfront.net/ETHUSDT_BTCUSDT.png" alt="ETHUSDT/BTCUSDT linear regression" width="32%">
+    <img src="https://dtjn1pr44tf3g.cloudfront.net/BTCUSDT_plot2.png" alt="BTCUSDT scatter plot" width="32%">
+    <img src="https://dtjn1pr44tf3g.cloudfront.net/ETHUSDT_plot2.png" alt="ETHUSDT scatter plot" width="32%">
+    <img src="https://dtjn1pr44tf3g.cloudfront.net/ETHUSDT_BTCUSDT2.png" alt="ETHUSDT/BTCUSDT linear regression" width="32%">
 </p>
 
 Для построения графиков делались выборки из 15-ти минутных значений соответствующих фьючерсов
