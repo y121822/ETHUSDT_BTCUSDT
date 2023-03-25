@@ -57,7 +57,8 @@ class Process:
                 percentage = abs((ethusdt_decoupled-self.ethusdt_decoupled_prev)/self.ethusdt_decoupled_prev * 100)
                 self.ethusdt_decoupled_prev = ethusdt_decoupled
                 if percentage >= self.threshold:
-                    print(f'{percentage}% change of the BTCUSDT free ETHUSDT price within {self.minutes} minutes.')
+                    print(f'{percentage}% change of the BTCUSDT free ETHUSDT price within {self.minutes} minutes '
+                          f'starting from {self.start.strftime("%Y-%m-%d %H:%M:%S")} UTC')
             else:
                 self.start = self.now
                 self.ethusdt_decoupled_prev = None
