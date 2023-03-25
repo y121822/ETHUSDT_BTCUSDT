@@ -42,7 +42,7 @@ class Process:
         self.slope, self.intercept = Setup(interval, days).create_coefficients()
         self.now, self.btcusdt, self.ethusdt, self.ethusdt_decoupled_prev = None, None, None, None
         self.threshold, self.minutes = threshold, minutes
-        self.start = datetime.utcnow()
+        self.start, self.delta = datetime.utcnow(), timedelta(minutes=minutes)
 
     async def process(self):
         """The coroutine to find independent of BTCUSDT ETHUSDT futures price movements and to send
@@ -51,7 +51,7 @@ class Process:
         if self.ethusdt and self.btcusdt:
             ethusdt_decoupled = abs(self.ethusdt - (self.intercept + self.slope * self.btcusdt))
 
-            if (self.now - self.start) < timedelta(minutes=self.minutes):
+            if (self.now - self.start) < self.delta:
                 if not self.ethusdt_decoupled_prev:
                     self.ethusdt_decoupled_prev = ethusdt_decoupled
                 percentage = abs((ethusdt_decoupled-self.ethusdt_decoupled_prev)/self.ethusdt_decoupled_prev * 100)
