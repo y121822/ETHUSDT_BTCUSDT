@@ -7,7 +7,7 @@ Write a Python program to constantly (in real time with minimal delay) control
 the ETHUSDT futures price and using the chosen method to determine 
 own changes of the ETH price. If there is a 1% price change within the last 
 60 minutes, the program sends a message to the console and continue to run 
-without any pauses reading actual price values.
+without any pauses, reading actual price values.
 
 ----
 
@@ -47,12 +47,12 @@ Residuals between the real and predicted values are interpreted as own movements
 ETHUSDT prices
 
 ### Task #2 solution:
-Please see app.py. The asynchronous approach was used to meet the minimal delay
+Please see app.py and comments inside. The asynchronous approach was used to meet the minimal delay
 requirement.
 
 ----
 
-### Usage
+### Usage:
 Download files from this repository, install dependencies and launch app.py or
 use Docker.
 
