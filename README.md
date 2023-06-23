@@ -22,7 +22,7 @@ and has the emphasized linear character.
 </p>
 
 Data for the graphs consists of 15 minutes values of the proper futures obtained 
-within 30 days (2899 observations for each). As it seen in the R code snippet 
+within 30 days (2899 observations for each). As it is seen in the R code snippet 
 bellow, the correlation coefficient is close to one.
 
 ```R
